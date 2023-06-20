@@ -5,7 +5,7 @@ import pygame
 from pygame.locals import *
 
 from configuracion import *
-from funcionesNuevas import *
+from funcionesAUXILIARES import *
 
 from extras import *
 
@@ -75,7 +75,11 @@ def main():
                     candidata = candidata[0 : len(candidata) - 1]  # borra la ultima
                 if e.key == K_RETURN:  # presionó enter
                     puntos += procesar(
-                        letraPrincipal, letrasEnPantalla, candidata, diccionario
+                        letraPrincipal,
+                        letrasEnPantalla,
+                        candidata,
+                        diccionario,
+                        palabrasAcertadas
                     )
                     candidata = ""
 
