@@ -1,25 +1,28 @@
-#! /usr/bin/env python
-import os, random, sys, math
-
+import os
 import pygame
 from pygame.locals import *
 
 from configuracion import *
-from funcionesAUXILIARES import *
-
 from extras import *
 
+# Importo funciones auxiliares de la logica del juego
+from funcionesAUXILIARES import *
 
-# Funcion principal
-def main():
+
+# Funcion del juego
+def game():
+    pygame.init()
+    pygame.display.init()
     # Centrar la ventana y despues inicializar pygame
     os.environ["SDL_VIDEO_CENTERED"] = "1"
-    pygame.init()
-    # pygame.mixer.init()
 
     # Preparar la ventana
     pygame.display.set_caption("Adivina la Palabra")
     screen = pygame.display.set_mode((ANCHO, ALTO))
+
+    # Cargar la imagen de fondo
+    imagen_fondo = pygame.image.load("assets/background_game.jpeg")
+    imagen_fondo = pygame.transform.scale(imagen_fondo, (ANCHO, ALTO))
 
     # tiempo total del juego
     gameClock = pygame.time.Clock()
@@ -49,8 +52,12 @@ def main():
 
     print(dameAlgunasCorrectas(letraPrincipal, letrasEnPantalla, diccionario))
 
-    # dibuja la pantalla la primera vez
+    # Dibujar la pantalla la primera vez
+    screen.blit(
+        imagen_fondo, (0, 0)
+    )  # Dibujar la imagen de fondo en la posición (0, 0)
     dibujar(screen, letraPrincipal, letrasEnPantalla, candidata, puntos, segundos)
+    pygame.display.update()
 
     while segundos > fps / 1000:
         # 1 frame cada 1/fps segundos
@@ -79,7 +86,7 @@ def main():
                         letrasEnPantalla,
                         candidata,
                         diccionario,
-                        palabrasAcertadas
+                        palabrasAcertadas,
                     )
                     candidata = ""
 
@@ -89,9 +96,11 @@ def main():
         screen.fill(COLOR_FONDO)
 
         # Dibujar de nuevo todo
+        screen.blit(
+            imagen_fondo, (0, 0)
+        )  # Dibujar la imagen de fondo en la posición (0, 0)
         dibujar(screen, letraPrincipal, letrasEnPantalla, candidata, puntos, segundos)
-
-        pygame.display.flip()
+        pygame.display.update()
 
     while 1:
         # Esperar el QUIT del usuario
@@ -99,8 +108,3 @@ def main():
             if e.type == QUIT:
                 pygame.quit()
                 return
-
-
-# Programa Principal ejecuta Main
-if __name__ == "__main__":
-    main()

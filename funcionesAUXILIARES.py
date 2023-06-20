@@ -2,12 +2,22 @@ from configuracion import *
 import random
 
 
+# lee el archivo y carga en la lista diccionario todas las palabras
+# def lectura(diccionario=[]):
+#     with open("lemario.txt", "r") as archivo:
+#         for palabra in archivo:
+#             palabra = palabra.strip()
+#             diccionario.append(palabra)
+#     return diccionario
+
+
+# Separa los archivos del diccionario en cuatro para agilizar la carga del juego
 def lectura(diccionario=[]):
     archivos = [
-        "diccionario1.txt",
-        "diccionario2.txt",
-        "diccionario3.txt",
-        "diccionario4.txt",
+        "data/diccionario1.txt",
+        "data/diccionario2.txt",
+        "data/diccionario3.txt",
+        "data/diccionario4.txt",
     ]
     archivo_seleccionado = random.choice(archivos)
 
