@@ -92,7 +92,8 @@ def dibujar(screen, letraPrincipal, letrasEnPantalla, candidata, puntos, segundo
                 (pos, 100),
             )
         pos = pos + TAMANNO_LETRA_GRANDE
-
+    
+    
     screen.blit(ren1, (190, 570))
     screen.blit(ren2, (680, 10))
     screen.blit(ren3, (10, 10))

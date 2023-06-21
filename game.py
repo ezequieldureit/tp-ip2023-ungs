@@ -62,6 +62,7 @@ def game():
         # 1 frame cada 1/fps segundos
         gameClock.tick(fps)
         totaltime += gameClock.get_time()
+        segundos = TIEMPO_MAX - totaltime / 1000
 
         if True:
             fps = 3
@@ -71,7 +72,7 @@ def game():
             # QUIT es apretar la X en la ventana
             if e.type == QUIT:
                 pygame.quit()
-                return ()
+                sys.exit()
 
             # Ver si fue apretada alguna tecla
             if e.type == KEYDOWN:
