@@ -107,4 +107,6 @@ def game():
         for e in pygame.event.get():
             if e.type == QUIT:
                 pygame.quit()
+                sys.exit()
+
                 return
