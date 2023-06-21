@@ -11,10 +11,9 @@ from funcionesAUXILIARES import *
 
 # Funcion del juego
 def game():
-    pygame.init()
-    pygame.display.init()
     # Centrar la ventana y despues inicializar pygame
     os.environ["SDL_VIDEO_CENTERED"] = "1"
+    pygame.init()
 
     # Preparar la ventana
     pygame.display.set_caption("Adivina la Palabra")
