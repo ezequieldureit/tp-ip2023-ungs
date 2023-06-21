@@ -1,31 +1,13 @@
 from configuracion import *
 import random
 
+
 # lee el archivo y carga en la lista diccionario todas las palabras
 def lectura(diccionario=[]):
-    with open("data/lemario.txt", "r") as archivo:
-        for palabra in archivo:
-            palabra = palabra.strip()
-            diccionario.append(palabra)
+    with open("data/diccionario.txt", "r") as archivo:
+        palabras = [palabra.strip() for palabra in archivo]
+    diccionario.extend(palabras)
     return diccionario
-
-
-# Separa los archivos del diccionario en cuatro para agilizar la carga del juego
-# def lectura(diccionario=[]):
-#     archivos = [
-#         "data/diccionario1.txt",
-#         "data/diccionario2.txt",
-#         "data/diccionario3.txt",
-#         "data/diccionario4.txt",
-#     ]
-#     archivo_seleccionado = random.choice(archivos)
-
-#     with open(archivo_seleccionado, "r") as archivo:
-#         for palabra in archivo:
-#             palabra = palabra.strip()
-#             diccionario.append(palabra)
-
-#     return diccionario
 
 
 # Devuelve una cadena de 7 caracteres sin repetir con 2 o 3 vocales y a lo sumo
@@ -72,16 +54,14 @@ def procesar(
         return -1
 
 
-# chequea que se use la letra principal, solo use letras de la pantalla y
-# exista en el diccionario
-def esValida(letraPrincipal, letrasEnPantalla, candidata, diccionario):
-    for i in range(len(candidata)):
-        if candidata[i] not in letrasEnPantalla:
-            return False
-        if not candidata[0] == letraPrincipal:
-            return False
-        if candidata not in diccionario:
-            return False
+# chequea que la letra seleccionada esté dentro de la palabra, use solo letras de la pantalla y exista en el diccionario
+def esValida(letraSeleccionada, letrasEnPantalla, candidata, diccionario):
+    if letraSeleccionada not in candidata:
+        return False
+    if not set(candidata).issubset(set(letrasEnPantalla)):
+        return False
+    if candidata not in diccionario:
+        return False
     return True
 
 
