@@ -94,7 +94,9 @@ def Puntos(candidata):
         return 1
     elif longPalabra == 4:
         return 2
-    elif longPalabra == 5 or longPalabra == 7:
+    elif longPalabra == 7:
+        return 10
+    elif longPalabra == 5 or longPalabra == 6:
         return longPalabra
     else:
         return 0
