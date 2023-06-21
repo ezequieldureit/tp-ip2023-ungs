@@ -1,5 +1,8 @@
 from configuracion import *
 import random
+import pygame
+
+pygame.mixer.init()
 
 
 # lee el archivo y carga en la lista diccionario todas las palabras
@@ -47,6 +50,7 @@ def procesar(
             palabrasAcertadas.append(
                 candidata
             )  # Agrega la palabra a la lista de palabras acertadas
+
             return Puntos(candidata)
         else:
             return 0
@@ -70,14 +74,24 @@ def Puntos(candidata):
     longPalabra = len(candidata)
 
     if longPalabra == 3:
+        val = 1
+        sonidosVarios(val)
         return 1
     elif longPalabra == 4:
+        val = 1
+        sonidosVarios(val)
         return 2
     elif longPalabra == 7:
+        val = 1
+        sonidosVarios(val)
         return 10
     elif longPalabra == 5 or longPalabra == 6:
+        val = 1
+        sonidosVarios(val)
         return longPalabra
     else:
+        val = 0
+        sonidosVarios(val)
         return 0
 
 
@@ -88,3 +102,16 @@ def dameAlgunasCorrectas(letraPrincipal, letrasEnPantalla, diccionario):
         if esValida(letraPrincipal, letrasEnPantalla, palabra, diccionario):
             palabras_correctas.append(palabra)
     return palabras_correctas
+
+
+# sonidos que se ejecutan con palabras correctas e incorrectas EXTRA
+def sonidosVarios(valores):
+    if valores == 1:
+        sonidoCorrecto = pygame.mixer.Sound("Sonidos/woohoo-text-sms.mp3")
+        sonidoCorrecto.set_volume(0.8)
+        sonidoCorrecto.play()
+
+    elif valores == 0:
+        sonidoIncorrecto = pygame.mixer.Sound("Sonidos/perder-incorrecto-no-valido.mp3")
+        sonidoIncorrecto.set_volume(0.8)
+        sonidoIncorrecto.play()

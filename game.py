@@ -14,6 +14,7 @@ def game():
     # Centrar la ventana y despues inicializar pygame
     os.environ["SDL_VIDEO_CENTERED"] = "1"
     pygame.init()
+    pygame.mixer.init()
 
     # Preparar la ventana
     pygame.display.set_caption("Adivina la Palabra")
@@ -40,6 +41,11 @@ def game():
     # elige las 7 letras al azar y una de ellas como principal
     letrasEnPantalla = dame7Letras()
     letraPrincipal = dameLetra(letrasEnPantalla)
+    
+    # Cargar de musica de fondo - leo
+    pygame.mixer.music.load("Sonidos/mision-imposible-peliculas-.mp3")
+    pygame.mixer.music.set_volume(0.3)
+    pygame.mixer.music.play(loops=-1)
 
     # se queda con 7 letras que permitan armar muchas palabras, evita que el juego sea aburrido
     while (
@@ -109,4 +115,4 @@ def game():
                 pygame.quit()
                 sys.exit()
 
-                return
+                
