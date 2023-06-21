@@ -63,7 +63,7 @@ def dameLetraApretada(key):
         return ""
 
 
-def dibujar(screen, letraPrincipal, letrasEnPantalla, candidata, puntos, segundos):
+def dibujar(screen, letraPrincipal, letrasEnPantalla, candidata, puntos, segundos,palabrasAcertadas):
     defaultFont = pygame.font.Font(pygame.font.get_default_font(), 20)
     defaultFontGrande = pygame.font.Font(pygame.font.get_default_font(), 80)
 
@@ -79,21 +79,37 @@ def dibujar(screen, letraPrincipal, letrasEnPantalla, candidata, puntos, segundo
     else:
         ren3 = defaultFont.render("Tiempo: " + str(int(segundos)), 1, COLOR_TEXTO)
     # escribe grande la palabra (letra por letra) y la letra principal de otro color
-    pos = 130
+    pos = 90
     for i in range(len(letrasEnPantalla)):
         if letrasEnPantalla[i] == letraPrincipal:
             screen.blit(
                 defaultFontGrande.render(letrasEnPantalla[i], 1, COLOR_TIEMPO_FINAL),
-                (pos, 100),
+                (pos, 90),
             )
         else:
             screen.blit(
                 defaultFontGrande.render(letrasEnPantalla[i], 1, COLOR_LETRAS),
-                (pos, 100),
+                (pos, 90),
             )
         pos = pos + TAMANNO_LETRA_GRANDE
-    
-    
+
+
+    #ESCRIBE LAS PALABRAS QUE EL USUARIO ACERTE
+    pos=100
+    pos2=210
+    ren4=defaultFont.render("Correctas:", 1,COLOR_TEXTO)
+    for i in range(len(palabrasAcertadas)):
+        if len(palabrasAcertadas[i]) > 2:
+            if pos<=700:
+                screen.blit(defaultFont.render(palabrasAcertadas[i], 1, COLOR_LETRAS), (pos, pos2))
+            else:
+                pos=0
+                pos2+=25
+                screen.blit(defaultFont.render(palabrasAcertadas[i], 1, COLOR_LETRAS), (pos, pos2))
+            pos+=TAMANNO_LETRA_GRANDE
+
+
     screen.blit(ren1, (190, 570))
     screen.blit(ren2, (680, 10))
     screen.blit(ren3, (10, 10))
+    screen.blit(ren4, (0,210))

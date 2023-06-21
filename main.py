@@ -1,7 +1,8 @@
 import pygame
 from pygame.locals import *
 from game import *
-from menu import *
+from menu import main_menu, options
+
 
 
 if __name__ == "__main__":

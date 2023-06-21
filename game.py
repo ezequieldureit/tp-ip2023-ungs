@@ -10,7 +10,7 @@ from funcionesAUXILIARES import *
 
 
 # Funcion del juego
-def game():
+def game(DIFICULTAD):
     # Centrar la ventana y despues inicializar pygame
     os.environ["SDL_VIDEO_CENTERED"] = "1"
     pygame.init()
@@ -21,7 +21,7 @@ def game():
     screen = pygame.display.set_mode((ANCHO, ALTO))
 
     # Cargar la imagen de fondo
-    imagen_fondo = pygame.image.load("assets/background_game.jpeg")
+    imagen_fondo = pygame.image.load("assets/img/background_game.jpeg")
     imagen_fondo = pygame.transform.scale(imagen_fondo, (ANCHO, ALTO))
 
     # tiempo total del juego
@@ -41,9 +41,9 @@ def game():
     # elige las 7 letras al azar y una de ellas como principal
     letrasEnPantalla = dame7Letras()
     letraPrincipal = dameLetra(letrasEnPantalla)
-    
+
     # Cargar de musica de fondo - leo
-    pygame.mixer.music.load("Sonidos/mision-imposible-peliculas-.mp3")
+    pygame.mixer.music.load("assets/sounds/mision-imposible-peliculas-.mp3")
     pygame.mixer.music.set_volume(0.3)
     pygame.mixer.music.play(loops=-1)
 
@@ -61,7 +61,7 @@ def game():
     screen.blit(
         imagen_fondo, (0, 0)
     )  # Dibujar la imagen de fondo en la posición (0, 0)
-    dibujar(screen, letraPrincipal, letrasEnPantalla, candidata, puntos, segundos)
+    dibujar(screen, letraPrincipal, letrasEnPantalla, candidata, puntos, segundos,palabrasAcertadas)
     pygame.display.update()
 
     while segundos > fps / 1000:
@@ -94,6 +94,7 @@ def game():
                         diccionario,
                         palabrasAcertadas,
                     )
+                    correctas(palabrasAcertadas,letraPrincipal, letrasEnPantalla, candidata, diccionario)
                     candidata = ""
 
         segundos = TIEMPO_MAX - pygame.time.get_ticks() / 1000
@@ -105,7 +106,7 @@ def game():
         screen.blit(
             imagen_fondo, (0, 0)
         )  # Dibujar la imagen de fondo en la posición (0, 0)
-        dibujar(screen, letraPrincipal, letrasEnPantalla, candidata, puntos, segundos)
+        dibujar(screen, letraPrincipal, letrasEnPantalla, candidata, puntos, segundos,palabrasAcertadas)
         pygame.display.update()
 
     while 1:
@@ -115,4 +116,4 @@ def game():
                 pygame.quit()
                 sys.exit()
 
-                
+

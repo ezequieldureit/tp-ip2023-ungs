@@ -2,6 +2,7 @@ import pygame
 import sys
 from button import Button
 from game import *
+from configuracion import *
 
 pygame.init()
 pygame.display.init()
@@ -11,12 +12,12 @@ WINDOW_WIDTH, WINDOW_HEIGHT = SCREEN.get_size()
 
 pygame.display.set_caption("Juego de palabras")
 
-BG = pygame.image.load("assets/background_game.jpeg")
+BG = pygame.image.load("assets/img/background_game.jpeg")
 BG = pygame.transform.scale(BG, (WINDOW_WIDTH, WINDOW_HEIGHT))
 
 
 def get_font(size):
-    return pygame.font.Font("assets/font.ttf", size)
+    return pygame.font.Font("assets/fonts/font.ttf", size)
 
 
 def main_menu():
@@ -29,7 +30,7 @@ def main_menu():
         MENU_RECT = MENU_TEXT.get_rect(center=(390, 60))
 
         PLAY_BUTTON = Button(
-            image=pygame.image.load("assets/Play Rect.png"),
+            image=pygame.image.load("assets/img/Play Rect.png"),
             pos=(390, 170),
             text_input="JUGAR",
             font=get_font(30),
@@ -37,7 +38,7 @@ def main_menu():
             hovering_color="Green",
         )
         OPTIONS_BUTTON = Button(
-            image=pygame.image.load("assets/Options Rect.png"),
+            image=pygame.image.load("assets/img/Options Rect.png"),
             pos=(390, 290),
             text_input="DIFICULTAD",
             font=get_font(30),
@@ -45,7 +46,7 @@ def main_menu():
             hovering_color="Green",
         )
         QUIT_BUTTON = Button(
-            image=pygame.image.load("assets/Quit Rect.png"),
+            image=pygame.image.load("assets/img/Quit Rect.png"),
             pos=(390, 410),
             text_input="SALIR",
             font=get_font(30),
@@ -75,9 +76,9 @@ def main_menu():
         pygame.display.update()
 
 
-def play(difficulty="easy"):
+def play():
     while True:
-        game()
+        game()  # Pasa la dificultad seleccionada a la función game()
         pygame.display.update()
 
 
@@ -92,7 +93,7 @@ def options():
         SCREEN.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
         EASY_BUTTON = Button(
-            image=pygame.image.load("assets/Options Rect.png"),
+            image=pygame.image.load("assets/img/Options Rect.png"),
             pos=(390, 170),
             text_input="FACIL",
             font=get_font(30),
@@ -100,7 +101,7 @@ def options():
             hovering_color="Green",
         )
         MEDIUM_BUTTON = Button(
-            image=pygame.image.load("assets/Options Rect.png"),
+            image=pygame.image.load("assets/img/Options Rect.png"),
             pos=(390, 290),
             text_input="MEDIO",
             font=get_font(30),
@@ -108,7 +109,7 @@ def options():
             hovering_color="Green",
         )
         HARD_BUTTON = Button(
-            image=pygame.image.load("assets/Options Rect.png"),
+            image=pygame.image.load("assets/img/Options Rect.png"),
             pos=(390, 410),
             text_input="DIFICIL",
             font=get_font(30),
@@ -125,7 +126,7 @@ def options():
         HARD_BUTTON.update(SCREEN)
 
         OPTIONS_BACK = Button(
-            image=pygame.image.load("assets/Options Rect.png"),
+            image=pygame.image.load("assets/img/Options Rect.png"),
             pos=(390, 530),
             text_input="VOLVER",
             font=get_font(30),
@@ -147,11 +148,11 @@ def options():
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if EASY_BUTTON.checkForInput(OPTIONS_MOUSE_POS):
-                    play("easy")
+                    game(DIFICULTAD="easy")
                 if MEDIUM_BUTTON.checkForInput(OPTIONS_MOUSE_POS):
-                    play("medium")
+                    game(DIFICULTAD="medium")
                 if HARD_BUTTON.checkForInput(OPTIONS_MOUSE_POS):
-                    play("hard")
+                    game(DIFICULTAD="hard")
                 if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
                     main_menu()
 

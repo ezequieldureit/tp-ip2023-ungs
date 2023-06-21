@@ -69,30 +69,78 @@ def esValida(letraSeleccionada, letrasEnPantalla, candidata, diccionario):
     return True
 
 
-# devuelve los puntos
+
 def Puntos(candidata):
     longPalabra = len(candidata)
 
-    if longPalabra == 3:
-        val = 1
-        sonidosVarios(val)
-        return 1
-    elif longPalabra == 4:
-        val = 1
-        sonidosVarios(val)
-        return 2
-    elif longPalabra == 7:
-        val = 1
-        sonidosVarios(val)
-        return 10
-    elif longPalabra == 5 or longPalabra == 6:
-        val = 1
-        sonidosVarios(val)
-        return longPalabra
-    else:
-        val = 0
-        sonidosVarios(val)
-        return 0
+    # Config puntaje dificultad EASY  
+    if DIFICULTAD == "easy":
+        if longPalabra == 3:
+            val = 1
+            sonidosVarios(val)
+            return 1
+        elif longPalabra == 4:
+            val = 1
+            sonidosVarios(val)
+            return 2
+        elif longPalabra == 7:
+            val = 1
+            sonidosVarios(val)
+            return 10
+        elif longPalabra == 5 or longPalabra == 6:
+            val = 1
+            sonidosVarios(val)
+            return longPalabra
+        else:
+            val = 0
+            sonidosVarios(val)
+            return 0
+        
+    # Config puntaje dificultad MEDIO    
+    elif DIFICULTAD == "medium":
+        if longPalabra == 3:
+            val = 1
+            sonidosVarios(val)
+            return 1
+        elif longPalabra == 3:
+            val = 1
+            sonidosVarios(val)
+            return 2
+        elif longPalabra == 7:
+            val = 1
+            sonidosVarios(val)
+            return 7
+        elif longPalabra == 5 or longPalabra == 6:
+            val = 1
+            sonidosVarios(val)
+            return 4
+        else:
+            val = 0
+            sonidosVarios(val)
+            return 0
+        
+    # Config puntaje dificultad HARD  
+    elif DIFICULTAD == "hard":
+        if longPalabra == 3:
+            val = 1
+            sonidosVarios(val)
+            return 1
+        elif longPalabra == 4:
+            val = 1
+            sonidosVarios(val)
+            return 1
+        elif longPalabra == 7:
+            val = 1
+            sonidosVarios(val)
+            return 5
+        elif longPalabra == 5 or longPalabra == 6:
+            val = 1
+            sonidosVarios(val)
+            return 3
+        else:
+            val = 0
+            sonidosVarios(val)
+            return 0
 
 
 # busca en el diccionario paralabras correctas y devuelve una lista de estas
@@ -107,11 +155,22 @@ def dameAlgunasCorrectas(letraPrincipal, letrasEnPantalla, diccionario):
 # sonidos que se ejecutan con palabras correctas e incorrectas EXTRA
 def sonidosVarios(valores):
     if valores == 1:
-        sonidoCorrecto = pygame.mixer.Sound("Sonidos/woohoo-text-sms.mp3")
+        sonidoCorrecto = pygame.mixer.Sound("assets/sounds/woohoo-text-sms.mp3")
         sonidoCorrecto.set_volume(0.8)
         sonidoCorrecto.play()
 
     elif valores == 0:
-        sonidoIncorrecto = pygame.mixer.Sound("Sonidos/perder-incorrecto-no-valido.mp3")
+        sonidoIncorrecto = pygame.mixer.Sound(
+            "assets/sounds/perder-incorrecto-no-valido.mp3"
+        )
         sonidoIncorrecto.set_volume(0.8)
         sonidoIncorrecto.play()
+
+
+# EVITA QUE EL USUARIO REPITA PALABRAS CORRECTAS
+def correctas(
+    palabrasAcertadas, letraPrincipal, letrasEnPantalla, candidata, diccionario
+):
+    if not candidata in palabrasAcertadas:
+        if esValida(letraPrincipal, letrasEnPantalla, candidata, diccionario):
+            palabrasAcertadas.append(candidata)
