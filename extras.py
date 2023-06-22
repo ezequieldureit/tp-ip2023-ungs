@@ -110,18 +110,18 @@ def dibujar(
             if pos <= 700:
                 screen.blit(
                     defaultFont.render(palabrasAcertadas[i], 1, COLOR_LETRAS),
-                    (pos, pos2),
+                    (pos + 30, pos2 ),
                 )
             else:
                 pos = 0
                 pos2 += 25
                 screen.blit(
                     defaultFont.render(palabrasAcertadas[i], 1, COLOR_LETRAS),
-                    (pos, pos2),
+                    (pos + 30, pos2 ),
                 )
             pos += TAMANNO_LETRA_GRANDE
 
     screen.blit(ren1, (190, 570))
     screen.blit(ren2, (680, 10))
     screen.blit(ren3, (10, 10))
-    screen.blit(ren4, (0, 210))
+    screen.blit(ren4, (10, 210))
