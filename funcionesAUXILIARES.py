@@ -40,7 +40,12 @@ def dameLetra(letrasEnPantalla):  # elige una letra de las letras en pantalla
 
 # si es valida la palabra devuelve puntos sino resta.
 def procesar(
-    letraPrincipal, letrasEnPantalla, candidata, diccionario, palabrasAcertadas
+    letraPrincipal,
+    letrasEnPantalla,
+    candidata,
+    diccionario,
+    palabrasAcertadas,
+    DIFICULTAD,
 ):
     if (
         esValida(letraPrincipal, letrasEnPantalla, candidata, diccionario)
@@ -51,7 +56,7 @@ def procesar(
                 candidata
             )  # Agrega la palabra a la lista de palabras acertadas
 
-            return Puntos(candidata)
+            return Puntos(candidata, DIFICULTAD)
         else:
             return 0
     else:
@@ -69,11 +74,10 @@ def esValida(letraSeleccionada, letrasEnPantalla, candidata, diccionario):
     return True
 
 
-
-def Puntos(candidata):
+def Puntos(candidata, DIFICULTAD):
     longPalabra = len(candidata)
 
-    # Config puntaje dificultad EASY  
+    # Config puntaje dificultad EASY
     if DIFICULTAD == "easy":
         if longPalabra == 3:
             val = 1
@@ -95,14 +99,14 @@ def Puntos(candidata):
             val = 0
             sonidosVarios(val)
             return 0
-        
-    # Config puntaje dificultad MEDIO    
-    elif DIFICULTAD == "medium":
+
+    # Config puntaje dificultad MEDIO
+    if DIFICULTAD == "medium":
         if longPalabra == 3:
             val = 1
             sonidosVarios(val)
             return 1
-        elif longPalabra == 3:
+        elif longPalabra == 4:
             val = 1
             sonidosVarios(val)
             return 2
@@ -118,9 +122,9 @@ def Puntos(candidata):
             val = 0
             sonidosVarios(val)
             return 0
-        
-    # Config puntaje dificultad HARD  
-    elif DIFICULTAD == "hard":
+
+    # Config puntaje dificultad HARD
+    if DIFICULTAD == "hard":
         if longPalabra == 3:
             val = 1
             sonidosVarios(val)

@@ -61,7 +61,15 @@ def game(DIFICULTAD):
     screen.blit(
         imagen_fondo, (0, 0)
     )  # Dibujar la imagen de fondo en la posición (0, 0)
-    dibujar(screen, letraPrincipal, letrasEnPantalla, candidata, puntos, segundos,palabrasAcertadas)
+    dibujar(
+        screen,
+        letraPrincipal,
+        letrasEnPantalla,
+        candidata,
+        puntos,
+        segundos,
+        palabrasAcertadas,
+    )
     pygame.display.update()
 
     while segundos > fps / 1000:
@@ -93,8 +101,15 @@ def game(DIFICULTAD):
                         candidata,
                         diccionario,
                         palabrasAcertadas,
+                        DIFICULTAD,
                     )
-                    correctas(palabrasAcertadas,letraPrincipal, letrasEnPantalla, candidata, diccionario)
+                    correctas(
+                        palabrasAcertadas,
+                        letraPrincipal,
+                        letrasEnPantalla,
+                        candidata,
+                        diccionario,
+                    )
                     candidata = ""
 
         segundos = TIEMPO_MAX - pygame.time.get_ticks() / 1000
@@ -106,7 +121,15 @@ def game(DIFICULTAD):
         screen.blit(
             imagen_fondo, (0, 0)
         )  # Dibujar la imagen de fondo en la posición (0, 0)
-        dibujar(screen, letraPrincipal, letrasEnPantalla, candidata, puntos, segundos,palabrasAcertadas)
+        dibujar(
+            screen,
+            letraPrincipal,
+            letrasEnPantalla,
+            candidata,
+            puntos,
+            segundos,
+            palabrasAcertadas,
+        )
         pygame.display.update()
 
     while 1:
@@ -115,5 +138,3 @@ def game(DIFICULTAD):
             if e.type == QUIT:
                 pygame.quit()
                 sys.exit()
-
-

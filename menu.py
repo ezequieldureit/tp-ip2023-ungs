@@ -3,6 +3,7 @@ import sys
 from button import Button
 from game import *
 from configuracion import *
+from funcionesAUXILIARES import *
 
 pygame.init()
 pygame.display.init()
@@ -45,9 +46,17 @@ def main_menu():
             base_color="Black",
             hovering_color="Green",
         )
+        INSTRUCTIONS_BUTTON = Button(
+            image=pygame.image.load("assets/img/Options Rect.png"),
+            pos=(390, 410),
+            text_input="INSTRUCCIONES",
+            font=get_font(30),
+            base_color="Black",
+            hovering_color="Green",
+        )
         QUIT_BUTTON = Button(
             image=pygame.image.load("assets/img/Quit Rect.png"),
-            pos=(390, 410),
+            pos=(390, 530),
             text_input="SALIR",
             font=get_font(30),
             base_color="Black",
@@ -56,7 +65,7 @@ def main_menu():
 
         SCREEN.blit(MENU_TEXT, MENU_RECT)
 
-        for button in [PLAY_BUTTON, OPTIONS_BUTTON, QUIT_BUTTON]:
+        for button in [PLAY_BUTTON, OPTIONS_BUTTON, INSTRUCTIONS_BUTTON, QUIT_BUTTON]:
             button.changeColor(MENU_MOUSE_POS)
             button.update(SCREEN)
 
@@ -69,6 +78,8 @@ def main_menu():
                     play()
                 if OPTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
                     options()
+                if INSTRUCTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
+                    instructions()
                 if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
                     pygame.quit()
                     sys.exit()
@@ -78,7 +89,7 @@ def main_menu():
 
 def play():
     while True:
-        game()  # Pasa la dificultad seleccionada a la función game()
+        game(DIFICULTAD="easy")  # Pasa la dificultad seleccionada a la función game()
         pygame.display.update()
 
 
@@ -154,6 +165,40 @@ def options():
                 if HARD_BUTTON.checkForInput(OPTIONS_MOUSE_POS):
                     game(DIFICULTAD="hard")
                 if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
+                    main_menu()
+
+        pygame.display.update()
+
+
+def instructions():
+    while True:
+        INSTRUCTIONS_MOUSE_POS = pygame.mouse.get_pos()
+        BG_I = pygame.image.load("assets/img/Instrucciones.png")
+        BG_I = pygame.transform.scale(BG_I, (WINDOW_WIDTH, WINDOW_HEIGHT))
+
+        SCREEN.blit(BG_I, (0, 0))
+
+        INSTRUCTIONS_TEXT = get_font(30).render("INSTRUCCIONES", True, "Black")
+        INSTRUCTIONS_RECT = INSTRUCTIONS_TEXT.get_rect(center=(WINDOW_WIDTH / 2, 60))
+        SCREEN.blit(INSTRUCTIONS_TEXT, INSTRUCTIONS_RECT)
+
+        INSTRUCTIONS_BACK = Button(
+            image=pygame.image.load("assets/img/Options Rect.png"),
+            pos=(WINDOW_WIDTH / 2, WINDOW_HEIGHT - 70),
+            text_input="VOLVER",
+            font=get_font(30),
+            base_color="Black",
+            hovering_color="Green",
+        )
+        INSTRUCTIONS_BACK.changeColor(INSTRUCTIONS_MOUSE_POS)
+        INSTRUCTIONS_BACK.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if INSTRUCTIONS_BACK.checkForInput(INSTRUCTIONS_MOUSE_POS):
                     main_menu()
 
         pygame.display.update()
