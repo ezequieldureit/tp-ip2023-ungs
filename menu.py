@@ -5,8 +5,10 @@ from game import *
 from configuracion import *
 from funcionesAUXILIARES import *
 
+
 pygame.init()
-pygame.display.init()
+# pygame.display.init()
+
 
 SCREEN = pygame.display.set_mode((800, 600))
 WINDOW_WIDTH, WINDOW_HEIGHT = SCREEN.get_size()
@@ -20,6 +22,10 @@ BG = pygame.transform.scale(BG, (WINDOW_WIDTH, WINDOW_HEIGHT))
 def get_font(size):
     return pygame.font.Font("assets/fonts/font.ttf", size)
 
+
+def play():
+    while True:
+        game(DIFICULTAD="easy")  # Pasa la dificultad seleccionada a la función game()
 
 def main_menu():
     while True:
@@ -85,14 +91,6 @@ def main_menu():
                     sys.exit()
 
         pygame.display.update()
-
-
-def play():
-    while True:
-        game("easy")  # Pasa la dificultad seleccionada a la función game()
-        main_menu()
-        pygame.display.update()
-
 
 
 def options():
