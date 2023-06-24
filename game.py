@@ -133,8 +133,7 @@ def game(DIFICULTAD):
         )
 
         pygame.display.update()
-        print("segundos al final:",segundos)
-        print("totaltime al final:",totaltime)
+
     cierre(letraPrincipal,
         letrasEnPantalla,
         diccionario)
