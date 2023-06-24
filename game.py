@@ -9,7 +9,6 @@ from extras import *
 from funcionesAUXILIARES import *
 
 
-
 # Funcion del juego
 def game(DIFICULTAD):
     # Centrar la ventana y despues inicializar pygame
@@ -35,7 +34,6 @@ def game(DIFICULTAD):
     totaltime = 0
     segundos = TIEMPO_MAX
     fps = FPS_inicial
-
 
     puntos = 0
     candidata = ""
@@ -115,8 +113,6 @@ def game(DIFICULTAD):
                         diccionario,
                     )
                     candidata = ""
-
-        segundos = TIEMPO_MAX - pygame.time.get_ticks() / 1000
 
         # Limpiar pantalla anterior
         screen.fill(COLOR_FONDO)
