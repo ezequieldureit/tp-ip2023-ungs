@@ -2,6 +2,8 @@ import pygame
 import sys
 from pygame.locals import *
 from configuracion import *
+from funcionesAUXILIARES import *
+from button import Button
 
 
 def dameLetraApretada(key):
@@ -125,3 +127,72 @@ def dibujar(
     screen.blit(ren2, (680, 10))
     screen.blit(ren3, (10, 10))
     screen.blit(ren4, (10, 210))
+
+
+def cierre(letraprincipal,letrasEnPantalla,diccionario):
+
+    diccionario = dameAlgunasCorrectas(letraprincipal,letrasEnPantalla,diccionario)
+
+    lista = [palabra for palabra in diccionario if palabra.startswith(letraprincipal)][:10]
+    palabras_filtradas = lista[1:]
+    pygame.display.init()
+
+    # Preparar la ventana
+    pygame.display.set_caption("Lista de palabras correctas con la inicial " + letraprincipal.upper())
+    screen = pygame.display.set_mode((ANCHO, ALTO))
+
+    # Cargar la imagen de fondo
+    imagen_fondo = pygame.image.load("assets/img/background_game2.webp")
+    imagen_fondo = pygame.transform.scale(imagen_fondo, (ANCHO, ALTO))
+
+    screen.blit(
+        imagen_fondo, (0, 0)
+    )
+    WHITE = (255, 255, 255)
+    BLACK = (0, 0, 0)
+
+    x = 500
+    y = 50
+    espacio = 50
+    volver = True
+    texto = "Palabras correctas con la incial " + letraprincipal.upper()
+    MENU_TEXT = pygame.font.Font("assets/fonts/font.ttf", 15).render(str(texto), True, BLACK)
+
+    MENU_RECT = MENU_TEXT.get_rect(center=(500, 15))
+    screen.blit(MENU_TEXT, MENU_RECT)
+    font = pygame.font.Font("assets/fonts/font.ttf", 20)
+    BLACK = (0, 0, 0)
+    for palabra in palabras_filtradas:
+        y += espacio
+        palabras = font.render(str(palabra), True, BLACK)
+        screen.blit(palabras, (x, y))
+        pygame.display.update()
+
+
+    while volver:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+        BACK_BUTTON = Button(
+            image=pygame.image.load("assets/img/Play Rect.png"),
+            pos=(220, 500),
+            text_input="MENU",
+            font=pygame.font.Font("assets/fonts/font.ttf", 20),
+            base_color="Black",
+            hovering_color="Green",
+        )
+
+        BACK_BUTTON.changeColor(MENU_MOUSE_POS)
+        BACK_BUTTON.update(screen)
+
+        for button in [BACK_BUTTON]:
+            button.changeColor(MENU_MOUSE_POS)
+            button.update(screen)
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if BACK_BUTTON.checkForInput(MENU_MOUSE_POS):
+                    volver = False
+
+        pygame.display.update()

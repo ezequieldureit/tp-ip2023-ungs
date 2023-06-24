@@ -27,6 +27,7 @@ def game(DIFICULTAD):
     # tiempo total del juego
     gameClock = pygame.time.Clock()
     totaltime = 0
+
     segundos = TIEMPO_MAX
     fps = FPS_inicial
 
@@ -47,6 +48,7 @@ def game(DIFICULTAD):
     pygame.mixer.music.set_volume(0.3)
     pygame.mixer.music.play(loops=-1)
 
+    temporizador_id = pygame.USEREVENT
     # se queda con 7 letras que permitan armar muchas palabras, evita que el juego sea aburrido
     while (
         len(dameAlgunasCorrectas(letraPrincipal, letrasEnPantalla, diccionario))
@@ -72,8 +74,10 @@ def game(DIFICULTAD):
     )
     pygame.display.update()
 
-    while segundos > fps / 1000:
+
+    while segundos < fps/1000:
         # 1 frame cada 1/fps segundos
+
         gameClock.tick(fps)
         totaltime += gameClock.get_time()
         segundos = TIEMPO_MAX - totaltime / 1000
@@ -112,7 +116,6 @@ def game(DIFICULTAD):
                     )
                     candidata = ""
 
-        segundos = TIEMPO_MAX - pygame.time.get_ticks() / 1000
 
         # Limpiar pantalla anterior
         screen.fill(COLOR_FONDO)
@@ -130,11 +133,13 @@ def game(DIFICULTAD):
             segundos,
             palabrasAcertadas,
         )
-        pygame.display.update()
 
-    while 1:
-        # Esperar el QUIT del usuario
-        for e in pygame.event.get():
-            if e.type == QUIT:
-                pygame.quit()
-                sys.exit()
+        pygame.display.update()
+        print("segundos al final:",segundos)
+        print("totaltime al final:",totaltime)
+    cierre(letraPrincipal,
+        letrasEnPantalla,
+        diccionario)
+    pygame.time.set_timer(pygame.USEREVENT, 0)
+    pygame.mixer.quit()
+

@@ -89,8 +89,10 @@ def main_menu():
 
 def play():
     while True:
-        game(DIFICULTAD="easy")  # Pasa la dificultad seleccionada a la función game()
+        game("easy")  # Pasa la dificultad seleccionada a la función game()
+        main_menu()
         pygame.display.update()
+
 
 
 def options():
