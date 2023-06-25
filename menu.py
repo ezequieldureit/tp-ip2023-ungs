@@ -26,6 +26,7 @@ def get_font(size):
 def play():
     while True:
         game(DIFICULTAD="easy")  # Pasa la dificultad seleccionada a la función game()
+        main_menu()
 
 def main_menu():
     while True:

@@ -129,16 +129,16 @@ def dibujar(
     screen.blit(ren4, (10, 210))
 
 
-def cierre(letraprincipal,letrasEnPantalla,diccionario):
+def cierre(palabrasAcertadas):
 
-    diccionario = dameAlgunasCorrectas(letraprincipal,letrasEnPantalla,diccionario)
 
-    lista = [palabra for palabra in diccionario if palabra.startswith(letraprincipal)][:10]
-    palabras_filtradas = lista[1:]
+
+    palabras_filtradas = sorted(palabrasAcertadas)
+    print(palabras_filtradas)
     pygame.display.init()
 
     # Preparar la ventana
-    pygame.display.set_caption("Lista de palabras correctas con la inicial " + letraprincipal.upper())
+    pygame.display.set_caption("Palabras acertadas:  ")
     screen = pygame.display.set_mode((ANCHO, ALTO))
 
     # Cargar la imagen de fondo
@@ -155,18 +155,22 @@ def cierre(letraprincipal,letrasEnPantalla,diccionario):
     y = 50
     espacio = 50
     volver = True
-    texto = "Palabras correctas con la incial " + letraprincipal.upper()
-    MENU_TEXT = pygame.font.Font("assets/fonts/font.ttf", 15).render(str(texto), True, BLACK)
+    texto = "Palabras acertadas en el juego: "
+    MENU_TEXT = pygame.font.Font("assets/fonts/font.ttf", 20).render(str(texto), True, BLACK)
 
     MENU_RECT = MENU_TEXT.get_rect(center=(500, 15))
     screen.blit(MENU_TEXT, MENU_RECT)
     font = pygame.font.Font("assets/fonts/font.ttf", 20)
     BLACK = (0, 0, 0)
+    cont=1
     for palabra in palabras_filtradas:
         y += espacio
-        palabras = font.render(str(palabra), True, BLACK)
+        text = str(cont) + "- " + palabra
+        print(text)
+        palabras = font.render(str(text), True, BLACK)
         screen.blit(palabras, (x, y))
         pygame.display.update()
+        cont +=1
 
 
     while volver:

@@ -133,10 +133,9 @@ def game(DIFICULTAD):
         )
 
         pygame.display.update()
-
-    cierre(letraPrincipal,
-        letrasEnPantalla,
-        diccionario)
-    pygame.time.set_timer(pygame.USEREVENT, 0)
+    if(len(palabrasAcertadas) > 0):
+        cierre(
+            palabrasAcertadas,
+            )
     pygame.mixer.quit()
 
