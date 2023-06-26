@@ -112,14 +112,14 @@ def dibujar(
             if pos <= 700:
                 screen.blit(
                     defaultFont.render(palabrasAcertadas[i], 1, COLOR_LETRAS),
-                    (pos + 30, pos2 ),
+                    (pos + 30, pos2),
                 )
             else:
                 pos = 0
                 pos2 += 25
                 screen.blit(
                     defaultFont.render(palabrasAcertadas[i], 1, COLOR_LETRAS),
-                    (pos + 30, pos2 ),
+                    (pos + 30, pos2),
                 )
             pos += TAMANNO_LETRA_GRANDE
 
@@ -130,11 +130,7 @@ def dibujar(
 
 
 def cierre(palabrasAcertadas):
-
-
-
     palabras_filtradas = sorted(palabrasAcertadas)
-    print(palabras_filtradas)
     pygame.display.init()
 
     # Preparar la ventana
@@ -145,10 +141,7 @@ def cierre(palabrasAcertadas):
     imagen_fondo = pygame.image.load("assets/img/background_game2.webp")
     imagen_fondo = pygame.transform.scale(imagen_fondo, (ANCHO, ALTO))
 
-    screen.blit(
-        imagen_fondo, (0, 0)
-    )
-    WHITE = (255, 255, 255)
+    screen.blit(imagen_fondo, (0, 0))
     BLACK = (0, 0, 0)
 
     x = 500
@@ -156,22 +149,22 @@ def cierre(palabrasAcertadas):
     espacio = 50
     volver = True
     texto = "Palabras acertadas en el juego: "
-    MENU_TEXT = pygame.font.Font("assets/fonts/font.ttf", 20).render(str(texto), True, BLACK)
+    MENU_TEXT = pygame.font.Font("assets/fonts/font.ttf", 20).render(
+        str(texto), True, BLACK
+    )
 
-    MENU_RECT = MENU_TEXT.get_rect(center=(500, 15))
+    MENU_RECT = MENU_TEXT.get_rect(center=(400, 30))
     screen.blit(MENU_TEXT, MENU_RECT)
     font = pygame.font.Font("assets/fonts/font.ttf", 20)
     BLACK = (0, 0, 0)
-    cont=1
+    cont = 1
     for palabra in palabras_filtradas:
         y += espacio
         text = str(cont) + "- " + palabra
-        print(text)
         palabras = font.render(str(text), True, BLACK)
         screen.blit(palabras, (x, y))
         pygame.display.update()
-        cont +=1
-
+        cont += 1
 
     while volver:
         MENU_MOUSE_POS = pygame.mouse.get_pos()
@@ -179,7 +172,7 @@ def cierre(palabrasAcertadas):
             image=pygame.image.load("assets/img/Play Rect.png"),
             pos=(220, 500),
             text_input="MENU",
-            font=pygame.font.Font("assets/fonts/font.ttf", 20),
+            font=pygame.font.Font("assets/fonts/font.ttf", 30),
             base_color="Black",
             hovering_color="Green",
         )
