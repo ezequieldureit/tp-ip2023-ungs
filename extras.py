@@ -2,6 +2,8 @@ import pygame
 import sys
 from pygame.locals import *
 from configuracion import *
+from funcionesAUXILIARES import *
+from button import Button
 
 
 def dameLetraApretada(key):
@@ -110,14 +112,14 @@ def dibujar(
             if pos <= 700:
                 screen.blit(
                     defaultFont.render(palabrasAcertadas[i], 1, COLOR_LETRAS),
-                    (pos + 30, pos2 ),
+                    (pos + 30, pos2),
                 )
             else:
                 pos = 0
                 pos2 += 25
                 screen.blit(
                     defaultFont.render(palabrasAcertadas[i], 1, COLOR_LETRAS),
-                    (pos + 30, pos2 ),
+                    (pos + 30, pos2),
                 )
             pos += TAMANNO_LETRA_GRANDE
 
@@ -125,3 +127,69 @@ def dibujar(
     screen.blit(ren2, (680, 10))
     screen.blit(ren3, (10, 10))
     screen.blit(ren4, (10, 210))
+
+
+def cierre(palabrasAcertadas):
+    palabras_filtradas = sorted(palabrasAcertadas)
+    pygame.display.init()
+
+    # Preparar la ventana
+    pygame.display.set_caption("Palabras acertadas:  ")
+    screen = pygame.display.set_mode((ANCHO, ALTO))
+
+    # Cargar la imagen de fondo
+    imagen_fondo = pygame.image.load("assets/img/background_game2.webp")
+    imagen_fondo = pygame.transform.scale(imagen_fondo, (ANCHO, ALTO))
+
+    screen.blit(imagen_fondo, (0, 0))
+    BLACK = (0, 0, 0)
+
+    x = 500
+    y = 50
+    espacio = 50
+    volver = True
+    texto = "Palabras acertadas en el juego: "
+    MENU_TEXT = pygame.font.Font("assets/fonts/font.ttf", 20).render(
+        str(texto), True, BLACK
+    )
+
+    MENU_RECT = MENU_TEXT.get_rect(center=(400, 30))
+    screen.blit(MENU_TEXT, MENU_RECT)
+    font = pygame.font.Font("assets/fonts/font.ttf", 20)
+    BLACK = (0, 0, 0)
+    cont = 1
+    for palabra in palabras_filtradas:
+        y += espacio
+        text = str(cont) + "- " + palabra
+        palabras = font.render(str(text), True, BLACK)
+        screen.blit(palabras, (x, y))
+        pygame.display.update()
+        cont += 1
+
+    while volver:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+        BACK_BUTTON = Button(
+            image=pygame.image.load("assets/img/Play Rect.png"),
+            pos=(220, 500),
+            text_input="MENU",
+            font=pygame.font.Font("assets/fonts/font.ttf", 30),
+            base_color="Black",
+            hovering_color="Green",
+        )
+
+        BACK_BUTTON.changeColor(MENU_MOUSE_POS)
+        BACK_BUTTON.update(screen)
+
+        for button in [BACK_BUTTON]:
+            button.changeColor(MENU_MOUSE_POS)
+            button.update(screen)
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if BACK_BUTTON.checkForInput(MENU_MOUSE_POS):
+                    volver = False
+
+        pygame.display.update()

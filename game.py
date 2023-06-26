@@ -9,6 +9,7 @@ from extras import *
 from funcionesAUXILIARES import *
 
 
+
 # Funcion del juego
 def game(DIFICULTAD):
     # Centrar la ventana y despues inicializar pygame
@@ -24,7 +25,12 @@ def game(DIFICULTAD):
     imagen_fondo = pygame.image.load("assets/img/background_game.jpeg")
     imagen_fondo = pygame.transform.scale(imagen_fondo, (ANCHO, ALTO))
 
-    # tiempo total del juego
+    # Cargar de musica de fondo - leo
+    pygame.mixer.music.load("assets/sounds/mision-imposible-peliculas-.mp3")
+    pygame.mixer.music.set_volume(0.3)
+    pygame.mixer.music.play(loops=-1)
+
+    # Variables para el contador del tiempo
     gameClock = pygame.time.Clock()
     totaltime = 0
     segundos = TIEMPO_MAX
@@ -41,11 +47,6 @@ def game(DIFICULTAD):
     # elige las 7 letras al azar y una de ellas como principal
     letrasEnPantalla = dame7Letras()
     letraPrincipal = dameLetra(letrasEnPantalla)
-
-    # Cargar de musica de fondo - leo
-    pygame.mixer.music.load("assets/sounds/mision-imposible-peliculas-.mp3")
-    pygame.mixer.music.set_volume(0.3)
-    pygame.mixer.music.play(loops=-1)
 
     # se queda con 7 letras que permitan armar muchas palabras, evita que el juego sea aburrido
     while (
@@ -70,10 +71,13 @@ def game(DIFICULTAD):
         segundos,
         palabrasAcertadas,
     )
+
     pygame.display.update()
+    # Iniciar el contador de tiempo
 
     while segundos > fps / 1000:
         # 1 frame cada 1/fps segundos
+
         gameClock.tick(fps)
         totaltime += gameClock.get_time()
         segundos = TIEMPO_MAX - totaltime / 1000
@@ -112,8 +116,6 @@ def game(DIFICULTAD):
                     )
                     candidata = ""
 
-        segundos = TIEMPO_MAX - pygame.time.get_ticks() / 1000
-
         # Limpiar pantalla anterior
         screen.fill(COLOR_FONDO)
 
@@ -129,12 +131,15 @@ def game(DIFICULTAD):
             puntos,
             segundos,
             palabrasAcertadas,
+            
         )
-        pygame.display.update()
 
-    while 1:
-        # Esperar el QUIT del usuario
-        for e in pygame.event.get():
-            if e.type == QUIT:
-                pygame.quit()
-                sys.exit()
+        pygame.display.update()
+        
+    if(len(palabrasAcertadas) > 0):
+        cierre(
+            palabrasAcertadas,
+            )
+        
+    pygame.mixer.quit()
+

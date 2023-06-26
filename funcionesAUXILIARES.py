@@ -17,21 +17,37 @@ def lectura(diccionario=[]):
 # con una consonante difícil (kxyz)
 def dame7Letras():
     vocales = "aeiou"
-    consonantes = "bcdfghjklmnpqrstvwxyz"
+    consonantes = "bcdfghjlmnpqrstvw"
+    letras_dificiles = "kxyz"
 
-    # Seleccionar 2 o 3 vocales al azar sin repetir
-    num_vocales = random.randint(2, 3)
+    # Seleccionar 1 o 2 vocales al azar sin repetir
+    num_vocales = random.randint(1, 2)
     letras_vocales = random.sample(vocales, num_vocales)
 
     # Seleccionar el resto de letras como consonantes sin repetir
-    num_consonantes = 7 - num_vocales
+    num_consonantes = (
+        7 - num_vocales - 1
+    )  # Se reserva espacio para una posible letra difícil
     letras_consonantes = random.sample(consonantes, num_consonantes)
 
-    # Combinar las letras de forma aleatoria
-    letras = letras_vocales + letras_consonantes
-    random.shuffle(letras)
+    # Agregar una letra difícil al azar con una probabilidad del 50%
+    if random.random() < 0.5:
+        letras_consonantes.append(random.choice(letras_dificiles))
+    else:
+        num_consonantes += (
+            1  # No se agregó una letra difícil, se recupera el espacio reservado
+        )
 
-    return "".join(letras)
+    # Seleccionar una letra aleatoria para llenar el espacio restante
+    letras_restantes = letras_vocales + letras_consonantes
+    letras_finales = letras_restantes + random.sample(
+        vocales + consonantes, 7 - len(letras_restantes)
+    )
+
+    # Combinar las letras de forma aleatoria
+    random.shuffle(letras_finales)
+
+    return "".join(letras_finales)
 
 
 # Elige una letra de las letras en pantalla

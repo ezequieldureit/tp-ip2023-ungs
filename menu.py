@@ -5,8 +5,10 @@ from game import *
 from configuracion import *
 from funcionesAUXILIARES import *
 
+# Aca esta concentrado el menu y su funcionalidad
+
 pygame.init()
-pygame.display.init()
+
 
 SCREEN = pygame.display.set_mode((800, 600))
 WINDOW_WIDTH, WINDOW_HEIGHT = SCREEN.get_size()
@@ -20,6 +22,11 @@ BG = pygame.transform.scale(BG, (WINDOW_WIDTH, WINDOW_HEIGHT))
 def get_font(size):
     return pygame.font.Font("assets/fonts/font.ttf", size)
 
+
+def play():
+    while True:
+        game(DIFICULTAD="easy")  # Pasa la dificultad seleccionada a la función game()
+        main_menu() # Si el usuario no acerta palabras vuelve al menu.
 
 def main_menu():
     while True:
@@ -84,12 +91,6 @@ def main_menu():
                     pygame.quit()
                     sys.exit()
 
-        pygame.display.update()
-
-
-def play():
-    while True:
-        game(DIFICULTAD="easy")  # Pasa la dificultad seleccionada a la función game()
         pygame.display.update()
 
 
