@@ -85,7 +85,9 @@ def procesar(
             return Puntos(candidata, DIFICULTAD)
         else:
             return 0
+
     else:
+        sonidosVarios(0)
         return -1
 
 
