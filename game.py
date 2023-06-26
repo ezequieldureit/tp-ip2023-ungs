@@ -138,7 +138,7 @@ def game(DIFICULTAD):
         
     if(len(palabrasAcertadas) > 0):
         cierre(
-            palabrasAcertadas,
+            palabrasAcertadas,puntos
             )
         
     pygame.mixer.quit()

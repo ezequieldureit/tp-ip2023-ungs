@@ -5,6 +5,7 @@ from configuracion import *
 from funcionesAUXILIARES import *
 from button import Button
 
+# Función para obtener la letra presionada según la tecla
 
 def dameLetraApretada(key):
     if key == K_a:
@@ -64,7 +65,8 @@ def dameLetraApretada(key):
     else:
         return ""
 
-# Funcion mejorada 
+# Función para dibujar los elementos en la pantalla
+
 def dibujar(
     screen,
     letraPrincipal,
@@ -128,14 +130,14 @@ def dibujar(
     screen.blit(ren3, (10, 10))
     screen.blit(ren4, (10, 210))
 
-# Funcion adicional
+# Función para mostrar la pantalla de cierre
 
-def cierre(palabrasAcertadas):
+def cierre(palabrasAcertadas, puntos):
     palabras_filtradas = sorted(palabrasAcertadas)
     pygame.display.init()
 
     # Preparar la ventana
-    pygame.display.set_caption("Palabras acertadas:  ")
+    pygame.display.set_caption("Palabras acertadas")
     screen = pygame.display.set_mode((ANCHO, ALTO))
 
     # Cargar la imagen de fondo
@@ -143,21 +145,20 @@ def cierre(palabrasAcertadas):
     imagen_fondo = pygame.transform.scale(imagen_fondo, (ANCHO, ALTO))
 
     screen.blit(imagen_fondo, (0, 0))
+
     BLACK = (0, 0, 0)
 
-    x = 550
+    x = 450
     y = 50
-    espacio = 30
+    espacio = 20
     volver = True
-    texto = "Palabras acertadas en el juego: "
-    MENU_TEXT = pygame.font.Font("assets/fonts/font.ttf", 20).render(
+    texto = "Palabras correctas: "
+    MENU_TEXT = pygame.font.Font("assets/fonts/font.ttf", 15).render(
         str(texto), True, BLACK
     )
-
-    MENU_RECT = MENU_TEXT.get_rect(center=(400, 30))
+    MENU_RECT = MENU_TEXT.get_rect(center=(600, 50))
     screen.blit(MENU_TEXT, MENU_RECT)
     font = pygame.font.Font("assets/fonts/font.ttf", 10)
-    BLACK = (0, 0, 0)
     cont = 1
     for palabra in palabras_filtradas:
         y += espacio
@@ -166,6 +167,11 @@ def cierre(palabrasAcertadas):
         screen.blit(palabras, (x, y))
         pygame.display.update()
         cont += 1
+
+    puntos_texto = pygame.font.Font("assets/fonts/font.ttf", 15).render(
+        "Puntos: " + str(puntos), True, (0, 0, 0)
+    )
+    screen.blit(puntos_texto, (50, 50))
 
     while volver:
         MENU_MOUSE_POS = pygame.mouse.get_pos()
@@ -194,4 +200,3 @@ def cierre(palabrasAcertadas):
                     volver = False
 
         pygame.display.update()
-
