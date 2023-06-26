@@ -7,6 +7,7 @@ from button import Button
 
 # Función para obtener la letra presionada según la tecla
 
+
 def dameLetraApretada(key):
     if key == K_a:
         return "a"
@@ -65,7 +66,9 @@ def dameLetraApretada(key):
     else:
         return ""
 
+
 # Función para dibujar los elementos en la pantalla
+
 
 def dibujar(
     screen,
@@ -130,10 +133,12 @@ def dibujar(
     screen.blit(ren3, (10, 10))
     screen.blit(ren4, (10, 210))
 
+
 # Función para mostrar la pantalla de cierre
 
+
 def cierre(palabrasAcertadas, puntos):
-    palabras_filtradas = sorted(palabrasAcertadas)
+    
     pygame.display.init()
 
     # Preparar la ventana
@@ -160,13 +165,16 @@ def cierre(palabrasAcertadas, puntos):
     screen.blit(MENU_TEXT, MENU_RECT)
     font = pygame.font.Font("assets/fonts/font.ttf", 10)
     cont = 1
-    for palabra in palabras_filtradas:
-        y += espacio
-        text = str(cont) + "- " + palabra
-        palabras = font.render(str(text), True, BLACK)
-        screen.blit(palabras, (x, y))
-        pygame.display.update()
-        cont += 1
+
+    # Renderizar las palabras en la pantalla
+    for palabra in palabrasAcertadas:
+        if 3 <= len(palabra) <= 7:
+            y += espacio
+            text = str(cont) + "- " + palabra
+            palabras = font.render(str(text), True, BLACK)
+            screen.blit(palabras, (x, y))
+            pygame.display.update()
+            cont += 1
 
     puntos_texto = pygame.font.Font("assets/fonts/font.ttf", 15).render(
         "Puntos: " + str(puntos), True, (0, 0, 0)

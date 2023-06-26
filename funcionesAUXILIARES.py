@@ -151,14 +151,14 @@ def dameAlgunasCorrectas(letraPrincipal, letrasEnPantalla, diccionario):
 def sonidosVarios(valores):
     if valores >= 1:
         sonidoCorrecto = pygame.mixer.Sound("assets/sounds/woohoo-text-sms.mp3")
-        sonidoCorrecto.set_volume(0.8)
+        sonidoCorrecto.set_volume(0.5)
         sonidoCorrecto.play()
 
     elif valores <= 0:
         sonidoIncorrecto = pygame.mixer.Sound(
             "assets/sounds/perder-incorrecto-no-valido.mp3"
         )
-        sonidoIncorrecto.set_volume(0.8)
+        sonidoIncorrecto.set_volume(0.5)
         sonidoIncorrecto.play()
 
 

@@ -27,7 +27,7 @@ def game(DIFICULTAD):
 
     # Cargar de musica de fondo - leo
     pygame.mixer.music.load("assets/sounds/mision-imposible-peliculas-.mp3")
-    pygame.mixer.music.set_volume(0.3)
+    pygame.mixer.music.set_volume(0.1)
     pygame.mixer.music.play(loops=-1)
 
     # Variables para el contador del tiempo
