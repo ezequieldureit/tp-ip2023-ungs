@@ -64,7 +64,7 @@ def dameLetraApretada(key):
     else:
         return ""
 
-
+# Funcion mejorada 
 def dibujar(
     screen,
     letraPrincipal,
@@ -128,6 +128,7 @@ def dibujar(
     screen.blit(ren3, (10, 10))
     screen.blit(ren4, (10, 210))
 
+# Funcion adicional
 
 def cierre(palabrasAcertadas):
     palabras_filtradas = sorted(palabrasAcertadas)

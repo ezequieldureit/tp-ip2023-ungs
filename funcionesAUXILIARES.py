@@ -145,6 +145,7 @@ def dameAlgunasCorrectas(letraPrincipal, letrasEnPantalla, diccionario):
             palabras_correctas.append(palabra)
     return palabras_correctas
 
+# Funcionales adicionales
 
 # Reproduce sonidos correspondientes a palabras correctas o incorrectas
 def sonidosVarios(valores):
