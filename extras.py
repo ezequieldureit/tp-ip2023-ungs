@@ -144,9 +144,9 @@ def cierre(palabrasAcertadas):
     screen.blit(imagen_fondo, (0, 0))
     BLACK = (0, 0, 0)
 
-    x = 500
+    x = 550
     y = 50
-    espacio = 50
+    espacio = 30
     volver = True
     texto = "Palabras acertadas en el juego: "
     MENU_TEXT = pygame.font.Font("assets/fonts/font.ttf", 20).render(
@@ -155,7 +155,7 @@ def cierre(palabrasAcertadas):
 
     MENU_RECT = MENU_TEXT.get_rect(center=(400, 30))
     screen.blit(MENU_TEXT, MENU_RECT)
-    font = pygame.font.Font("assets/fonts/font.ttf", 20)
+    font = pygame.font.Font("assets/fonts/font.ttf", 10)
     BLACK = (0, 0, 0)
     cont = 1
     for palabra in palabras_filtradas:
@@ -193,3 +193,4 @@ def cierre(palabrasAcertadas):
                     volver = False
 
         pygame.display.update()
+
