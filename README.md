@@ -8,7 +8,7 @@ Tiene la palabra...
 El trabajo consiste en hacer un juego cuyo objetivo es armar palabras de al menos 3 letras. Puedes repetir las letras, pero siempre incluyendo la letra principal. No se admiten plurales y formas verbales conjugadas (solo infinitivos).
 Puntuación: las palabras de 3 letras dan 1 punto y las de 4 letras, 2 puntos. A partir de 5 letras, se obtendrá tantos puntos como letras tenga la palabra. Los heptacracks (palabras de 7 letras) valen 10 puntos y cada error resta 1 punto.
 Gran parte del juego ya está resuelto, faltan implementar las funcionalidades más importantes.
-1. El Juego
+
 Reglas del Juego
 Se juega de a un jugador, que cuenta con 60 segundos para sumar la mayor cantidad de puntos.
 
