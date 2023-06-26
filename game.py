@@ -9,6 +9,7 @@ from extras import *
 from funcionesAUXILIARES import *
 
 
+
 # Funcion del juego
 def game(DIFICULTAD):
     # Centrar la ventana y despues inicializar pygame
@@ -130,12 +131,15 @@ def game(DIFICULTAD):
             puntos,
             segundos,
             palabrasAcertadas,
+            
         )
 
         pygame.display.update()
+        
     if(len(palabrasAcertadas) > 0):
         cierre(
             palabrasAcertadas,
             )
+        
     pygame.mixer.quit()
 
